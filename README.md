@@ -81,36 +81,6 @@ private PatternLockViewListener mPatternLockViewListener = new PatternLockViewLi
 And that's it! Your PatternLockView is ready to rock. You might also want to remove the listeners when not needed,         `removePatternLockListener(mPatternLockViewListener);`
 
 
-### Step 3 (Optional: ReactiveX Interface)
-
-For the RxJava fanboys, this library supports RxJava 2 view bindings. You can subscribe to this view to get a stream of pattern change updates.
-
-```java
-RxPatternLockView.patternChanges(mPatternLockView)
-                .subscribe(new Consumer<PatternLockCompoundEvent>() {
-                    @Override
-                    public void accept(PatternLockCompoundEvent event) throws Exception {
-                        if (event.getEventType() == PatternLockCompoundEvent.EventType.PATTERN_STARTED) {
-                            Log.d(getClass().getName(), "Pattern drawing started");
-                        } else if (event.getEventType() == PatternLockCompoundEvent.EventType.PATTERN_PROGRESS) {
-                            Log.d(getClass().getName(), "Pattern progress: " +
-                                    PatternLockUtils.patternToString(mPatternLockView, event.getPattern()));
-                        } else if (event.getEventType() == PatternLockCompoundEvent.EventType.PATTERN_COMPLETE) {
-                            Log.d(getClass().getName(), "Pattern complete: " +
-                                    PatternLockUtils.patternToString(mPatternLockView, event.getPattern()));
-                        } else if (event.getEventType() == PatternLockCompoundEvent.EventType.PATTERN_CLEARED) {
-                            Log.d(getClass().getName(), "Pattern has been cleared");
-                        }
-                    }
-                });
-```
-
-If you are not interested in getting the compound event, you should subscribe to `patternComplete()` and/or `patternProgress()` for the specific updates. Have a detailed look [here](https://github.com/aritraroy/PatternLockView/blob/master/patternlockview-rxadapter/src/main/java/com/andrognito/rxpatternlockview/RxPatternLockView.java).
-
-# Customization
-
-There are several customization options available which you can use to completely change the look-and-feel and functionality of this view to match your needs.
-
 ### XML (Quick and Easy)
 
 You can add various attributes to the PatternLockView from your XML layout.
